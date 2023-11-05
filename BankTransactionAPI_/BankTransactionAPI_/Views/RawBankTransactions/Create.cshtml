@@ -1,0 +1,58 @@
+﻿@model BankTransactionAPI_.Models.RawBankTransactionsViewModel
+@{
+    ViewData["Title"] = "Add New Transaction";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<form action="Create" method="post" autocomplete="off">
+    <div class="mb-3">
+        <label class="form-label">Account Number</label>
+        <input type="text" class="form-control" asp-for="AccountNumber" />
+        <span asp-validation-for="AccountNumber" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Date</label>
+        <input type="date" class="form-control" asp-for="Date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Narration</label>
+        <input type="text" class="form-control" asp-for="Narration" />
+        <span asp-validation-for="Narration" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Amount</label>
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" asp-for="Amount" />
+        </div>
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-primary">SUBMIT</button>
+    </div>
+</form>
+
+@section Scripts{
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+
+

@@ -1,0 +1,65 @@
+﻿@model List<BankTransactionAPI_.Models.BankTransactionsViewModel>
+@{
+    ViewData["Title"] = "Bank Transaction";
+    var successMessage = TempData["successMessage"]?.ToString();
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>@ViewData["Title"]</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(successMessage))
+{
+    <div class="alert alert-success">
+        <strong>Sucess!</strong>@successMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+else if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@errorMessage
+
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<form>
+ 
+    <table class="table table-responsive table-hover table-bordered">
+        <thead>
+            <tr class="table-active">
+                <th class="text-center">ID</th>
+                <th class="text-center">Account Number</th>
+                <th class="text-center">Date</th>
+                <th class="text-center">Narration</th>
+                <th class="text-center">Amount</th>
+                <th class="text-center">Balance</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var BankTransaction in Model)
+                {
+                    <tr>
+                        <td class="text-center">@BankTransaction.ID</td>
+                        <td class="text-center">@BankTransaction.AccountNumber</td>
+                        <td class="text-center">@BankTransaction.Date.ToString("dd/mm/yyyy")</td>
+                        <td class="text-center">@BankTransaction.Narration</td>
+                        <td class="text-end">@BankTransaction.Amount</td>
+                        <td class="text-end">@BankTransaction.Balance</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6">
+                        <div>
+                            No transaction is done yet!
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>

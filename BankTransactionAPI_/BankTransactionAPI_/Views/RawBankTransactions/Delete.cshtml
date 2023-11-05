@@ -1,0 +1,47 @@
+﻿@model BankTransactionAPI_.Models.RawBankTransactionsViewModel
+@{
+    ViewData["Title"] = "Delete the Transaction";
+    var errorMessage = TempData["errorMessage"]?.ToString();
+}
+<h3>
+    @ViewData["Title"]
+</h3>
+<hr />
+@if (!string.IsNullOrWhiteSpace(errorMessage))
+{
+    <div class="alert alert-danger">
+        <strong>Error!</strong>@errorMessage
+        <button type="button" class="btn-close float-end" data-bs-dismiss="alert"></button>
+    </div>
+}
+<form action="Delete" method="post" autocomplete="off">
+
+    <div class="mb=3">
+        <label class="form-label"> ID </label>
+        <input type="text" class="form-control" asp-for="ID" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="mb-3">Account Number</label>
+        <input type="text" class="form-control" asp-for="AccountNumber" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="mb-3">Date</label>
+        <input type="date" class="form-control" asp-for="Date" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="mb-3">Narration</label>
+        <input type="text" class="form-control" asp-for="Narration" readonly />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Amount</label>
+        <div class="input-group">
+            <span class="input-group-text">$</span>
+            <input type="text" class="form-control" asp-for="Amount" readonly />
+        </div>
+        
+    </div>
+    <div class="d-grid">
+        <button type="submit" class="btn btn-danger" onclick= "return confirm ('Are you sure to delete Transaction ID: @Model.ID')">DELETE</button>
+    </div>
+</form>
+
